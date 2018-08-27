@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secret = require("../../config/keys").jwtSecret;
+const passport = require("passport");
 
 //Load User Model
 const User = require("../../models/User");
@@ -71,7 +72,7 @@ router.post("/login", (req, res) => {
       const payload = { id: user._id, email: user.email };
 
       // Create token
-      jwt.sign(payload, secret, { expiresIn: 120 }, (err, token) => {
+      jwt.sign(payload, secret, { expiresIn: 3600 }, (err, token) => {
         res.json({
           token: `Bearer ${token}`
         });
@@ -79,5 +80,14 @@ router.post("/login", (req, res) => {
     });
   });
 });
+
+// Test Private route
+router.get(
+  "/private",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json(req.user);
+  }
+);
 
 module.exports = router;
