@@ -15,7 +15,8 @@ mongoose
   .then(() => console.log("Database connection established"))
   .catch(err => console.log("Error connecting to database: " + err));
 
-app.get("/", (req, res) => res.send('Home "/"'));
+const user = require("./routes/api/users");
+app.use("/api/user", user);
 
 const port = process.env.PORT || 5000;
 
