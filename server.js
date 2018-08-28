@@ -28,7 +28,9 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 const user = require("./routes/api/users");
+const accounts = require("./routes/api/accounts");
 app.use("/api/user", user);
+app.use("/api/accounts", accounts);
 
 const port = process.env.PORT || 5000;
 
