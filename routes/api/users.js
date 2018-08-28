@@ -24,7 +24,7 @@ router.post("/register", (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
-      dateOfBirth: req.body.dateOfBirth
+      dateOfBirth: Date.parse(req.body.dateOfBirth)
     });
 
     const newAccount = new Account({
