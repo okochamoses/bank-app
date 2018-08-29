@@ -6,6 +6,10 @@ const TransactionSchema = new Schema({
     type: String,
     required: true
   },
+  type: {
+    type: String,
+    required: true
+  },
   senderAccount: {
     type: Number,
     required: true
