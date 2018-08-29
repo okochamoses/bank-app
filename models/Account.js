@@ -27,6 +27,18 @@ const AccountSchema = new Schema({
   }
 });
 
+AccountSchema.methods.debitAccount = function(amount, callback) {
+  if (this.balance < amount) throw Error("Insufficient funds");
+
+  this.balance -= amount;
+
+  return Account.findOneAndUpdate(
+    { number: this.number },
+    { balance: this.balance },
+    callback
+  );
+};
+
 const Account = mongoose.model("Account", AccountSchema);
 
 module.exports = Account;
