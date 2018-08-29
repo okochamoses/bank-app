@@ -40,6 +40,6 @@ TransactionSchema.methods.addRemark = function() {
   this.remarks = remarks;
 };
 
-const Transaction = mongoose.model("Tansaction", TransactionSchema);
+const Transaction = mongoose.model("Transaction", TransactionSchema);
 
 module.exports = Transaction;
