@@ -33,6 +33,13 @@ const TransactionSchema = new Schema({
   }
 });
 
+TransactionSchema.methods.addRemark = function() {
+  const remarks = `Transfer of ${this.amount} from ${this.senderAccount} to ${
+    this.recipientAccount
+  } ${this.bankName}`;
+  this.remarks = remarks;
+};
+
 const Transaction = mongoose.model("Tansaction", TransactionSchema);
 
 module.exports = Transaction;
