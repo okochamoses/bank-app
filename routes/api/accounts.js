@@ -3,7 +3,7 @@ const passport = require("passport");
 const Account = require("../../models/Account");
 const Transaction = require("../../models/Transaction");
 
-router.get("/test", (req, res) => res.json({ msg: success }));
+router.get("/test", (req, res) => res.json({ msg: "success" }));
 
 router.get(
   "/",
@@ -53,6 +53,16 @@ router.post(
           transaction: err.message
         });
       });
+  }
+);
+
+router.get(
+  "/:accountNumber/statement",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Transaction.getTransactions(req.params.accountNumber)
+      .then(accountStatement => res.json(accountStatement))
+      .catch(err => console.log(err));
   }
 );
 
