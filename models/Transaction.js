@@ -44,6 +44,10 @@ TransactionSchema.methods.addRemark = function() {
   this.remarks = remarks;
 };
 
+TransactionSchema.statics.getTransactions = function(accountNumber, callback) {
+  return Transaction.find({ senderAccount: accountNumber }, callback);
+};
+
 const Transaction = mongoose.model("Transaction", TransactionSchema);
 
 module.exports = Transaction;
