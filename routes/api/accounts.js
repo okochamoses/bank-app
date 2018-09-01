@@ -2,6 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 const Account = require("../../models/Account");
 const Transaction = require("../../models/Transaction");
+const transactionValidation = require("../../validator/transfer");
 
 router.get("/test", (req, res) => res.json({ msg: "success" }));
 
@@ -25,6 +26,10 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const accountNumber = req.params.accountNumber;
+
+    const { errors, isValid } = transactionValidation(req.body);
+
+    if (!isValid) return res.status(400).json(errors);
 
     const transaction = new Transaction({
       amount: req.body.amount,

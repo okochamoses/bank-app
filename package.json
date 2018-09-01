@@ -10,7 +10,6 @@
   "author": "Okocha Moses",
   "license": "MIT",
   "dependencies": {
-    "Validator": "^1.0.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
